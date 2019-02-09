@@ -17,36 +17,28 @@ public class Sort {
   
   public static void bubbleSort(int[] array)
   { 
-    int count = 0; //keeps track of how many times a swap did not occur
+    int lastSwap = 0; //keeps track of the last swap that occurred 
     for(int i = array.length; i > 0; i--)
     {
-      for(int j = 0; j < i - 1; j++)
+      lastSwap = 0; //resets the number back to 0
+      for(int j = 0; j < i-1; j++)
       {  
-        System.out.println(Arrays.toString(array));
         if(array[j] > array[j+1])
         {
           int temp = array[j]; 
           array[j] = array[j+1];
           array[j+1] = temp; 
-          count = 0; //count is brought back to 0 as soon as a number was swapped
+          lastSwap = j + 1; // this is where the last swap occurred
         }
-        else
-        {
-          count++; //count increases if the numbers were not swapped
-        }
-        
       }
-      if(count != 0) // if there were no swaps that occured in a row, the index can move forward to save time of relooping
-      {
-         i -= count; 
-      }
+      i = lastSwap + 1; //i is set to where the last swap happened and it increases one to counter the i--
     }
   }
   
   public static void main(String[] args)
   {
-    int[] data = new int[10];
-    seed(data, 0, 10);
+    int[] data = new int[50];
+    seed(data, 0,30);
     System.out.println(Arrays.toString(data));
     bubbleSort(data);
     System.out.println(Arrays.toString(data));
